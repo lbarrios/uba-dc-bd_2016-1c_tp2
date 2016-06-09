@@ -12,7 +12,7 @@ def get_pg_connection():
     try:
         conn=psycopg2.connect("dbname='bbdd' user='bbdd' host='localhost'")
     except:
-        extras.error("I am unable to connect to the database.")
+        extras.error("I am unable to connect to the pgsql database.")
     return conn
 
 def get_RealDictCursor(sql_file):
