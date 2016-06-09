@@ -34,7 +34,7 @@ GROUP BY
 --
 SELECT
     usuario.id_usuario,
-    extract (month from fecha)::int as mes,
+    mes,
     sum(comisiones_suscripciones.suscripcion) as suscripciones,
     sum(comisiones_suscripciones.comision) as comisiones
 
@@ -43,18 +43,18 @@ FROM
 
 INNER JOIN 
     (SELECT
-        id_usuario,
-        fecha_suscripcion as fecha
+        suscripcion.id_usuario,
+        extract (month from fecha_suscripcion)::int as mes,
         37.00 as suscripcion,
-        0 as comision,
+        0 as comision
     FROM
         suscripcion
     UNION
     SELECT
-        id_usuario,
-        operacion.fecha
+        usuario.id_usuario,
+        extract (month from operacion.fecha)::int as mes,
         0 as suscripcion,
-        comision,
+        operacion.comision
     FROM
         operacion
         INNER JOIN
@@ -68,4 +68,4 @@ INNER JOIN
 
 GROUP BY
     usuario.id_usuario,
-    extract (month from fecha)::int
+    comisiones_suscripciones.mes
