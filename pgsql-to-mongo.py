@@ -8,5 +8,7 @@ facturas = pgsql.get_RealDictCursor("facturas.sql")
 
 # Debug
 extras.clearScreen()
-for row in facturas.fetchall():
-    extras.prettyPrintJson2(row)
+print "Facturas:"
+extras.prettyPrintJson2(facturas.fetchall())
+print "Operaciones:"
+extras.prettyPrintJson2(operaciones.fetchall())
