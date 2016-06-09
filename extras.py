@@ -13,7 +13,7 @@ def error(error_message):
     exit(1)
 
 def convertToJson(obj):
-    formatted_json = simplejson.dumps(obj, indent=4, use_decimal=True, default=json_util.default)
+    formatted_json = simplejson.dumps(obj, indent=4, sort_keys=False, use_decimal=True, default=json_util.default)
     return formatted_json
 
 def prettyPrintJson(dict):
