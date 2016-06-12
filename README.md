@@ -14,7 +14,8 @@
 Completar
 
 ### Segunda parte:
-Tiene que poder responder:
+**Tiene que poder responder:**
+
 1. El importe total de ventas por usuario. (coleccion operaciones)
 2. La reputación histórica de cada usuario según la calificación. (coleccion operaciones)
 3. Las operaciones con comisión más alta. (coleccion operaciones)
