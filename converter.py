@@ -33,8 +33,8 @@ def operacion_record_to_dict(record):
 
 def factura_record_to_dict(record):
     factura = dict()
-    factura['id'] = record['id_usuario']
+    factura['usuario'] = record['id_usuario']
     factura['mes'] = record['mes']
-    factura['suscripciones'] = record['suscripciones']
-    factura['comisiones'] = record['comisiones']
+    factura['monto_suscripciones'] = record['suscripciones']
+    factura['monto_comisiones'] = record['comisiones']
     return factura
