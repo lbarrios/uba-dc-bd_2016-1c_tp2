@@ -14,6 +14,21 @@ def get_pg_connection():
         extras.error("I am unable to connect to the pgsql database.")
     return conn
 
+def get_DictCursor(sql_file):
+    """ Given a SQL file path, retrieves the query contained in it and
+    returns the pyscopg.DictCursor object representing the result
+    """
+    conn = get_pg_connection()
+    dict_cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query_pg_file = open(sql_file, "r")
+    query_pg = query_pg_file.read()
+    query_pg_file.close()
+    try:
+        dict_cur.execute(query_pg)
+    except Exception as err:
+        extras.error("I can't SELECT from query %s\nError: %s\nQuery:\n%s"%(sql_file,err,query_pg))
+    return dict_cur
+
 def get_RealDictCursor(sql_file):
     """ Given a SQL file path, retrieves the query contained in it and
     returns the psycopg.RealDictCursor object representing the result
@@ -22,6 +37,7 @@ def get_RealDictCursor(sql_file):
     dict_cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
     query_pg_file = open(sql_file, "r")
     query_pg = query_pg_file.read()
+    query_pg_file.close()
     try:
         dict_cur.execute(query_pg)
     except Exception as err:
