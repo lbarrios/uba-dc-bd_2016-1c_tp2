@@ -14,13 +14,23 @@ def operacion_record_to_document(record):
         'id_valoracion' : record['valoracion_comprador_id_valoracion'],
         'puntaje' : record['valoracion_comprador_puntaje'],
         'comentario' : record['valoracion_comprador_comentario'],
-        'respuesta' : record['valoracion_comprador_respuesta']
+        'respuesta' : record['valoracion_comprador_respuesta'],
     }
     operacion['valoracion_vendedor'] = {
         'id_valoracion' : record['valoracion_vendedor_id_valoracion'],
         'puntaje' : record['valoracion_vendedor_puntaje'],
         'comentario' : record['valoracion_vendedor_comentario'],
-        'respuesta' : record['valoracion_vendedor_respuesta']
+        'respuesta' : record['valoracion_vendedor_respuesta'],
+    }
+    operacion['publicacion'] = {
+        'id_publicacion': record['id_publicacion'],
+        'titulo': record['titulo'],
+        'descripcion': record['descripcion'],
+        'fecha': record['fecha'],
+        'id_tipo_publicacion': record['id_tipo_publicacion'],
+        'publicada_por': record['publicada_por'],
+        'tipo': record['tipo'],
+        'tipo_publicacion': record['tipo_publicacion'],
     }
     return operacion
 

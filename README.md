@@ -20,7 +20,7 @@ Tiene que poder responder:
 3. Las operaciones con comisión más alta. (coleccion operaciones)
 4. El monto total facturado por año.
 5. El monto total facturado por año de las operaciones pertenecientes a usuarios con suscripciones Rubi Oriente.
-6. El total de publicaciones por tipo de publicación (productos, servicios o mixtas).
+6. El total de publicaciones por tipo de publicación (productos, servicios o mixtas) *(asumimos que se refiere a las publicaciones que aparecen en nuestras operaciones)*
 
 ### Tercera parte:
 Completar

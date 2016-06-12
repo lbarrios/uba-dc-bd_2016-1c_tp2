@@ -11,7 +11,22 @@ SELECT
     valoracion_vendedor.id_valoracion as valoracion_vendedor_id_valoracion,
     valoracion_vendedor.puntaje as valoracion_vendedor_puntaje,
     valoracion_vendedor.comentario as valoracion_vendedor_comentario,
-    valoracion_vendedor.respuesta as valoracion_vendedor_respuesta
+    valoracion_vendedor.respuesta as valoracion_vendedor_respuesta,
+    publicacion.id_publicacion,
+    publicacion.titulo,
+    publicacion.descripcion,
+    publicacion.fecha,
+    publicacion.id_tipo_publicacion,
+    publicacion.tipo,
+    CASE 
+        WHEN EXISTS (SELECT * from servicio where id_publicacion=publicacion.id_publicacion) THEN 
+            CASE WHEN EXISTS (SELECT * FROM articulo WHERE id_publicacion=publicacion.id_publicacion) THEN
+                'mixta'
+            ELSE
+                'servicio'
+            END
+        ELSE 'articulo'
+    END as tipo_publicacion
 
 FROM
     operacion
