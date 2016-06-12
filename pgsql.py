@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import psycopg2
 import psycopg2.extras
-import extras
+import screen
 
 def get_pg_connection():
     """	Returns the pg_connection descriptor.
@@ -11,7 +11,7 @@ def get_pg_connection():
     try:
         conn=psycopg2.connect("dbname='bbdd' user='bbdd' host='localhost'")
     except:
-        extras.error("I am unable to connect to the pgsql database.")
+        screen.error("I am unable to connect to the pgsql database.")
     return conn
 
 def get_DictCursor(sql_file):
@@ -26,7 +26,7 @@ def get_DictCursor(sql_file):
     try:
         dict_cur.execute(query_pg)
     except Exception as err:
-        extras.error("I can't SELECT from query %s\nError: %s\nQuery:\n%s"%(sql_file,err,query_pg))
+        screen.error("I can't SELECT from query %s\nError: %s\nQuery:\n%s"%(sql_file,err,query_pg))
     return dict_cur
 
 def get_RealDictCursor(sql_file):
@@ -41,5 +41,5 @@ def get_RealDictCursor(sql_file):
     try:
         dict_cur.execute(query_pg)
     except Exception as err:
-        extras.error("I can't SELECT from query %s\nError: %s\nQuery:\n%s"%(sql_file,err,query_pg))
+        screen.error("I can't SELECT from query %s\nError: %s\nQuery:\n%s"%(sql_file,err,query_pg))
     return dict_cur

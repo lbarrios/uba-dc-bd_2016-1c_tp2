@@ -1,46 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import extras
+import screen
 import pgsql
+from converter import operacion_record_to_dict, factura_record_to_dict
 
-def operacion_record_to_document(record):
-    operacion = dict()
-    operacion['id'] = record['id_operacion']
-    operacion['precio'] = record['precio']
-    operacion['vendedor'] = record['publicada_por']
-    operacion['comprador'] = record['id_comprador']
-    operacion['comision'] = record['comision']
-    operacion['valoracion_comprador'] = {
-        'id_valoracion' : record['valoracion_comprador_id_valoracion'],
-        'puntaje' : record['valoracion_comprador_puntaje'],
-        'comentario' : record['valoracion_comprador_comentario'],
-        'respuesta' : record['valoracion_comprador_respuesta'],
-    }
-    operacion['valoracion_vendedor'] = {
-        'id_valoracion' : record['valoracion_vendedor_id_valoracion'],
-        'puntaje' : record['valoracion_vendedor_puntaje'],
-        'comentario' : record['valoracion_vendedor_comentario'],
-        'respuesta' : record['valoracion_vendedor_respuesta'],
-    }
-    operacion['publicacion'] = {
-        'id_publicacion': record['id_publicacion'],
-        'titulo': record['titulo'],
-        'descripcion': record['descripcion'],
-        'fecha': record['fecha'],
-        'id_tipo_publicacion': record['id_tipo_publicacion'],
-        'publicada_por': record['publicada_por'],
-        'tipo': record['tipo'],
-        'tipo_publicacion': record['tipo_publicacion'],
-    }
-    return operacion
+screen.clearScreen()
 
-operaciones_cur = pgsql.get_DictCursor("operaciones.sql")
+# Facturas
+print "Facturas:"
 facturas_cur = pgsql.get_DictCursor("facturas.sql")
+facturas = map(factura_record_to_dict, facturas_cur.fetchall())
+screen.prettyPrintJson2(facturas)
 
-# Debug
-extras.clearScreen()
-#print "Facturas:"
+# Operaciones
 print "Operaciones:"
-ops = operaciones_cur.fetchall()
-operaciones = map(operacion_record_to_document, ops)
-extras.prettyPrintJson2(operaciones)
+operaciones_cur = pgsql.get_DictCursor("operaciones.sql")
+operaciones = map(operacion_record_to_dict, operaciones_cur.fetchall())
+screen.prettyPrintJson2(operaciones)
